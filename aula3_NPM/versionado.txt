@@ -1,0 +1,29 @@
+Iniciar: npm init -y (carga paquete package.json que trae las dependencias
+que permiten instalar los node_modules y los demás paquetes)
+
+Instalar paquete: npm install nombre-paquete
+Instalar paquete en dev-dependencies: npm install nombre-paquete --save-dev
+(re)Instalar en dependencies: npm install nombre-paquete --save-prod
+Instalar version específica A.B.C: npm install nombre-paquete@A.B.C -E 
+(con -E se instala la versión específica sin posibilidad de actualizaciones)
+
+Desinstalar: npm uninstall nombre-paquete
+
+Buscar paquetes desactualizados: npm outdated 
+Actualizar: npm update (sólo actualiza minor y patch)
+
+Revisar o Listar los paquetes instalados: npm ls 
+(con npm ls --depth=1 se abren los contenidos de los paquetes instalados 
+pero hasta los primeros archivos. Con --depth=2 hasta los segundos archivos, etc)
+
+
+
+Las Versiones
+
+X.Y.Z === (version mayor).(minor).(patch)
+
+(version mayor): es la versión mayor que fue instalada
+(minor): si se actualiza se agregan funcionalidades pero sigue siendo compatible 
+con las (version mayor).
+(patch): es la versión parche que repara alguna funcionalidad, pero sigue siendo
+compatible con las demás.
