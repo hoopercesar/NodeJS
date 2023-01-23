@@ -1,0 +1,7 @@
+facebook.com/profiles/parámetros?query_strings
+
+parámetros-> pueden ser identificadores de usuarios, nombres algún id 
+query_strings -> son strings de consulta
+
+una url puede estar construida así
+http://subdominio.nombre-de-dominio.extension-de-dominio/ruta-del-recurso?parametros
