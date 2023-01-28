@@ -1,0 +1,10 @@
+mongodb+srv://cesarhooper:j%21a8VtLuh%24V2%2DuZ@cluster0.uttsn1e.mongodb.net/?retryWrites=true&w=majority
+
+j!a8VtLuh$V2-uZ
+(url enconding del password)
+j%21a8VtLuh%24V2%2DuZ
+
+simbolo: hex 
+!: 21
+$: 24
+-: 2D
