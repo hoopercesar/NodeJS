@@ -1,0 +1,15 @@
+<section class="conteiner">
+  <h2><%= titulo %></h2>
+  <p><%= numeros %></p>
+
+  <p><% csrfToken %></p>
+
+  <form action="/" method="post">
+    <input type="hidden" name="_csurf" value="<% csrfToken %>" />
+    <label>Cliente</label>
+    <input type="text" name="cliente" />
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+
+<script src="./assets/js/bundle.js"></script>
