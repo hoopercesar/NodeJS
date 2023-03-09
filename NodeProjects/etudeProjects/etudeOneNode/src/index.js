@@ -18,10 +18,8 @@ const sessionOptions = session({
   },
 });
 
-// console.log(require("./routes/index"));
-
 // Settings (sección de configuración)
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3512);
 app.set("views", path.join(__dirname, "views"));
 
 // config view engine
@@ -48,6 +46,7 @@ app.use(require("./routes/notes"));
 app.use(require("./routes/users"));
 
 // Statics files
+app.use(express.static(path.join(__dirname, "public")));
 
 // Server is listening
 app.listen(app.get("port"), () => {
