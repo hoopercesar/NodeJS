@@ -3,23 +3,25 @@ const path = require("path");
 const exphbs = require("express-handlebars");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const main = require("./database");
+// const MongoStore = require("connect-mongo");
 
 // Initializations
+main();
 const app = express();
 const sessionOptions = session({
   secret: "este es el secreto",
-
   // store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING }),
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    httpOnly: true,
-  },
+  // cookie: {
+  //   maxAge: 1000 * 60 * 60 * 24 * 7,
+  //   httpOnly: true,
+  // },
 });
 
 // Settings (sección de configuración)
-app.set("port", process.env.PORT || 3512);
+app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 
 // config view engine
@@ -51,4 +53,12 @@ app.use(express.static(path.join(__dirname, "public")));
 // Server is listening
 app.listen(app.get("port"), () => {
   console.log("Server Listening on Port", app.get("port"));
+  // console.log(app.get(port));
 });
+
+// app.on("Listo", () => {
+//   app.listen(3000, () => {
+//     console.log("http://localhost:3000");
+//     console.log("Server activo en la puerta 3000");
+//   });
+// });
