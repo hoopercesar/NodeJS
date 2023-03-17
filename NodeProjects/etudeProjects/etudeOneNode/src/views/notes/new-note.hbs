@@ -36,6 +36,13 @@
             Save
           </button>
         </div>
+
+        {{#if chat}}
+          <div class="alert alert-primary" role="alert">
+            {{chat}}
+          </div>
+        {{/if}}
+
       </form>
     </div>
   </div>
