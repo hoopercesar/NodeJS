@@ -6,7 +6,7 @@ router.get("/notes/add", (req, res) => {
   res.render("notes/new-note");
 });
 
-router.post("/notes/new-note", (req, res) => {
+router.post("/notes/new-note", async (req, res) => {
   const { title, description } = req.body;
   const errors = [];
 
@@ -21,8 +21,14 @@ router.post("/notes/new-note", (req, res) => {
     });
   } else {
     const note = new Note({ title, description });
+    const chat = [];
+    let hora = `${note.date.getHours()}:${note.date.getMinutes()}:${note.date.getSeconds()}`;
+    chat.push(`${note.title.toUpperCase()}: (${hora}) - ${note.description}`);
 
-    console.log(note);
+    res.render("notes/new-note", {
+      chat,
+    });
+    console.log();
   }
 });
 
