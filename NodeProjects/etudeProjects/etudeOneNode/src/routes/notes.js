@@ -47,51 +47,50 @@ router.post("/notes/new-note", async (req, res) => {
     const note = new Note({ title, description });
     const sampleAccounts = [
       {
-        speak: 1,
+        speak: 2,
         name: note.title,
         mensaje: note.description,
         hora: note.date,
       },
     ];
-    const documentsToFind = { speak: 1 };
+    const documentsToFind = { speak: 2 };
+    let chat = [];
 
     const main = async () => {
       try {
         await connectToDatabase();
-        // let u = await accountsCollection.insertMany(sampleAccounts);
-        let datos = await accountsCollection.find(documentsToFind);
-        console.log(datos);
+
+        let datos = await accountsCollection.insertMany(sampleAccounts);
+        let mensajes = await accountsCollection.find(documentsToFind).toArray();
+        mensajes.map((mensaje) => {
+          chat.push({
+            texto: `${mensaje.name.toUpperCase()}: ${mensaje.mensaje}`,
+          });
+        });
+        res.render("notes/new-note", {
+          chat,
+        });
+        console.log(chat.length);
+        // chat = `${mensajes.mensaje}`
+
+        // mensajes.map((mensaje) => {
+        //   console.log(mensaje);
+        // });
       } catch (e) {
         console.error(`Error de conexión, ${e}`);
       } finally {
         await client.close();
       }
     };
-
     main();
 
-    // para acceder a DB
-    const ingreso = async () => {
-      try {
-        await connectToDatabase();
-        let datos = await accountsCollection.find(documentsToFind);
-        console.log(datos);
-      } catch (e) {
-        console.error(`Error de conexión, ${e}`);
-      } finally {
-        await client.close();
-      }
-    };
-    ingreso();
+    // const chat = [];
+    // let hora = `${note.date.getHours()}:${note.date.getMinutes()}:${note.date.getSeconds()}`;
+    // chat.push(`${note.title.toUpperCase()}: (${hora}) - ${note.description}`);
 
-    // main(note);
-    const chat = [];
-    let hora = `${note.date.getHours()}:${note.date.getMinutes()}:${note.date.getSeconds()}`;
-    chat.push(`${note.title.toUpperCase()}: (${hora}) - ${note.description}`);
-
-    res.render("notes/new-note", {
-      chat,
-    });
+    // res.render("notes/new-note", {
+    //   chat,
+    // });
     // console.log("en notes", note);
   }
 });
