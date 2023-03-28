@@ -9,9 +9,9 @@ const uri = require("../atlas_uri");
 
 const client = new MongoClient(uri);
 const dbname = "Chat";
-const collection_name = "conversaciones";
+// const collection_name = "conversaciones";
 
-const accountsCollection = client.db(dbname).collection(collection_name);
+// const accountsCollection = client.db(dbname).collection(collection_name);
 
 const connectToDatabase = async () => {
   try {
@@ -53,6 +53,11 @@ router.post("/notes/new-note", async (req, res) => {
         hora: note.date,
       },
     ];
+
+    // Se crea una colección con nombre de usuario
+    const collection_name = note.title;
+    const accountsCollection = client.db(dbname).collection(collection_name);
+
     const documentsToFind = { speak: 2 };
     let chat = [];
 
@@ -61,10 +66,21 @@ router.post("/notes/new-note", async (req, res) => {
         await connectToDatabase();
 
         let datos = await accountsCollection.insertMany(sampleAccounts);
-        let mensajes = await accountsCollection.find(documentsToFind).toArray();
-        mensajes.map((mensaje) => {
+        //
+
+        let colecciones = await client.db(dbname).listCollections().toArray();
+        console.log(colecciones);
+        colecciones.map(async (coleccion) => {
+          let collection = await client
+            .db(dbname)
+            .collection(coleccion.name)
+            .find()
+            .toArray();
+
+          console.log(coleccion.name, collection);
+          // let mensajes = await collection.find(documentsToFind);
           chat.push({
-            texto: `${mensaje.name.toUpperCase()}: ${mensaje.mensaje}`,
+            // texto: `${mensaje.name.toUpperCase()}: ${mensaje.mensaje}`,
           });
         });
         res.render("notes/new-note", {
